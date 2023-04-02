@@ -5,13 +5,13 @@ const BillsHeader = () => {
 
   return (
     <div>
-      <h5>Billing</h5>
+      <h5>Ingresos</h5>
       <div className='flex justify-between'>
         <section>
-          <span>All bils</span>
+          <span>Todos los ingresos</span>
         </section>
         <section>
-          <button onClick={() => { navigate('./create') }}>Create bill</button>
+          <button onClick={() => { navigate('./create') }}>Agregar ingreso</button>
         </section>
       </div>
     </div>
