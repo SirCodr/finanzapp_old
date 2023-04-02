@@ -13,19 +13,28 @@ import { Link } from 'react-router-dom'
 const drawerWidth = 240
 
 function ResponsiveDrawer (props) {
+  const routeItems = [
+    {
+      path: 'dashboard'
+    },
+    {
+      path: 'incomes',
+      showName: 'Ingresos'
+    }
+  ]
   const drawer = (
     <div>
       <List>
-        {['Dashboard', 'Bills'].map((text, index) => {
-          const lowerText = text.toLocaleLowerCase()
+        {routeItems.map((routeItem, index) => {
+          const { path, showName } = routeItem
           return (
-            <Link to={lowerText} key={text}>
+            <Link to={path} key={index}>
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={showName ?? path} className='capitalize' />
                 </ListItemButton>
               </ListItem>
             </Link>
