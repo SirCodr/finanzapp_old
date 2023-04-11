@@ -9,6 +9,7 @@
       "@glbComponents/*": ["./src/glbComponents/*"],
       "@glbHooks/*": ["./src/glbHooks/*"],
       "@icons/*": ["./src/components/icons/*"],
-    }
+    },
+    "jsx": "react-jsx"
   }
 }
