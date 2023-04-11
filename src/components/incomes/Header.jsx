@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-const BillsHeader = () => {
+const IncomesHeader = () => {
   const navigate = useNavigate()
 
   return (
@@ -17,4 +17,4 @@ const BillsHeader = () => {
     </div>
   )
 }
-export default BillsHeader
+export default IncomesHeader

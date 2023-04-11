@@ -1,12 +1,12 @@
-import BillsHeader from './Header'
+import IncomesHeader from './Header'
 import View from './View'
 
-const BillsView = () => {
+const IncomesView = () => {
   return (
     <section className='grid grid-rows-[auto_1fr] w-full h-full'>
-      <BillsHeader />
+      <IncomesHeader />
       <View />
     </section>
   )
 }
-export default BillsView
+export default IncomesView

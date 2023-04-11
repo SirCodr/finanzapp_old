@@ -15,11 +15,19 @@ const drawerWidth = 240
 function ResponsiveDrawer (props) {
   const routeItems = [
     {
-      path: 'dashboard'
+      path: 'inicio'
     },
     {
       path: 'incomes',
       showName: 'Ingresos'
+    },
+    {
+      path: 'expenditures',
+      showName: 'gastos'
+    },
+    {
+      path: 'budget',
+      showName: 'presupuesto'
     }
   ]
   const drawer = (

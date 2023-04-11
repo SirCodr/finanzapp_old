@@ -21,19 +21,37 @@ function ToggleSideBar (props) {
     setMobileOpen(!mobileOpen)
   }
 
+  const routeItems = [
+    {
+      path: 'inicio'
+    },
+    {
+      path: 'incomes',
+      showName: 'Ingresos'
+    },
+    {
+      path: 'expenditures',
+      showName: 'gastos'
+    },
+    {
+      path: 'budget',
+      showName: 'presupuesto'
+    }
+  ]
+
   const drawer = (
     <div>
       <List>
-        {['Dashboard', 'Bills'].map((text, index) => {
-          const lowerText = text.toLocaleLowerCase()
+        {routeItems.map((routeItem, index) => {
+          const { path, showName } = routeItem
           return (
-            <Link to={lowerText} key={text}>
+            <Link to={path} key={index}>
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={showName ?? path} className='capitalize' />
                 </ListItemButton>
               </ListItem>
             </Link>

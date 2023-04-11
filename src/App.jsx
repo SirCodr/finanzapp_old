@@ -1,4 +1,5 @@
 import AppRoutes from '@components/routes'
+import 'semantic-ui-css/semantic.min.css'
 import './App.css'
 
 function App () {
