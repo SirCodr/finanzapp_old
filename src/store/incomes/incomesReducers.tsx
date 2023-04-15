@@ -1,4 +1,3 @@
-import { Income } from "@src/types/income"
 import { IncomeError, Incomes } from "./IncomesType"
 import { PayloadAction } from "@reduxjs/toolkit"
 import { IncomesWithForeigns } from "@src/types/collections"
