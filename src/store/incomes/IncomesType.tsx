@@ -1,6 +1,6 @@
 import { IncomesWithForeigns } from "@src/types/collections";
 
-export interface Incomes {
+export type Incomes = {
   data: [] | IncomesWithForeigns[],
   isLoading: boolean,
   error: IncomeError
