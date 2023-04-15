@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gen-supabase-types": "npx supabase gen types typescript --linked > src/types/supabase.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.16",
+    "@reduxjs/toolkit": "^1.9.3",
     "@supabase/supabase-js": "^2.12.1",
     "ag-grid-community": "^29.2.0",
     "ag-grid-react": "^29.2.0",
@@ -20,19 +22,23 @@
     "react": "^18.2.0",
     "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-toastify": "^9.1.2",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4"
   },
   "devDependencies": {
+    "@types/luxon": "^3.3.0",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.34",
+    "@types/react-datepicker": "^4.10.0",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "standard": "^17.0.0",
+    "supabase": "^1.50.4",
     "tailwindcss": "^3.2.7",
     "typescript": "^5.0.4",
     "vite": "^4.2.0"

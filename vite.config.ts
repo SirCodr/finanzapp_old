@@ -28,6 +28,10 @@ export default defineConfig({
       {
         find: '@icons',
         replacement: path.resolve(__dirname, './src/components/icons/')
+      },
+      {
+        find: '@store',
+        replacement: path.resolve(__dirname, './src/store/')
       }
     ]
   }

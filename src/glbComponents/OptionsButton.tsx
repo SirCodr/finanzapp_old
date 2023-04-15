@@ -1,17 +1,12 @@
 import { IconButton, Menu, MenuItem } from '@mui/material'
 import { useState } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { log } from 'console'
 
-const OptionsButton = () => {
-  const [anchorEl, setAnchorEl] = useState(null)
+const OptionsButton = ({ agGridParams, onClick }) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const open = Boolean(anchorEl)
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
+  
   return (
     <div>
       <IconButton
@@ -20,7 +15,7 @@ const OptionsButton = () => {
         aria-controls={open ? 'long-menu' : undefined}
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup='true'
-        onClick={handleClick}
+        onClick={(e)=>{ setAnchorEl(e.currentTarget) }}
       >
         <MoreVertIcon />
       </IconButton>
@@ -31,9 +26,9 @@ const OptionsButton = () => {
         }}
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClick={()=>{ setAnchorEl(null) }}
       >
-        <MenuItem onClick={handleClose}>Eliminar</MenuItem>
+        <MenuItem onClick={onClick}>Eliminar</MenuItem>
       </Menu>
     </div>
   )
