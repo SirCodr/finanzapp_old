@@ -84,6 +84,7 @@ const useIncomeView = () => {
       }
       
       dispatch(removeIncomeById(id))
+      toast.success('Registro eliminado con éxito')
     } catch (error) {
       
     } finally {
