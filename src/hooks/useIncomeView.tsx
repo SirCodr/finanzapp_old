@@ -6,6 +6,7 @@ import { useEffect, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from './useApp'
 import { deleteIncomeById } from '@src/services/incomes'
 import { toast } from 'react-toastify'
+import { PostgrestError } from '@supabase/supabase-js'
 
 const useIncomeView = () => {
   const { data, isLoading } = useAppSelector(
@@ -39,7 +40,7 @@ const useIncomeView = () => {
         dispatch(
           setError({
             status: true,
-            message: error,
+            message: error.message,
           })
         )
         dispatch(setData([]))
@@ -70,7 +71,7 @@ const useIncomeView = () => {
   const fetchIncomeDeleteById = async (id:number) => {
     const { removeIncomeById, setLoading } = incomesActions
 
-    const handleRequestOnError = (error) => {
+    const handleRequestOnError = (error: PostgrestError | null) => {
       toast.error('El registro no se pudo eliminar')
       console.warn('Error on delete request: ', error)
     }
