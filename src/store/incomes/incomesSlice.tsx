@@ -4,6 +4,7 @@ import { Incomes } from "./IncomesType"
 
 const initialState : Incomes = {
   data: [],
+  nextResultsAvailable: true,
   isLoading: false,
   error: {
     status: false,

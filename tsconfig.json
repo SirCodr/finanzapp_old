@@ -9,7 +9,7 @@
       "@glbComponents/*": ["./src/glbComponents/*"],
       "@glbHooks/*": ["./src/glbHooks/*"],
       "@icons/*": ["./src/components/icons/*"],
-      "@store/*": ["./src/store/*"]
+      "@store/*": ["./src/store/*"],
     },
     "target": "ESNext",
     "useDefineForClassFields": true,

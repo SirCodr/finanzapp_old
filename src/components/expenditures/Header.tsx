@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import { Button, Icon } from 'semantic-ui-react'
 
-const IncomesHeader = () => {
+const ExpendituresHeader = () => {
   const navigate = useNavigate()
 
   return (
     <div>
-      <h5>Ingresos</h5>
+      <h5>Gastos</h5>
       <div className='flex justify-between'>
         <section>
-          <span>Todos los ingresos</span>
+          <span>Todos los gastos</span>
         </section>
         <section className='flex gap-x-4'>
           <Button icon>
@@ -17,10 +17,10 @@ const IncomesHeader = () => {
             <span>Filtros</span>
           </Button>
           <Button>Comparar con presupuesto</Button>
-          <Button primary onClick={() => { navigate('../create') }}>Agregar ingreso</Button>
+          <Button primary onClick={() => { navigate('../create') }}>Agregar gasto</Button>
         </section>
       </div>
     </div>
   )
 }
-export default IncomesHeader
+export default ExpendituresHeader

@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState, useCallback } from 'react'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
@@ -9,32 +9,96 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import MailIcon from '@mui/icons-material/Mail'
 import { Link } from 'react-router-dom'
+import { Accordion, Menu } from 'semantic-ui-react'
 
 const drawerWidth = 240
 
-function ResponsiveDrawer (props) {
+function ResponsiveDrawer(props) {
   const routeItems = [
     {
       path: 'inicio'
     },
     {
       path: 'incomes',
-      showName: 'Ingresos'
+      title: 'ingresos',
+      children: [
+        {
+          path: 'all',
+          title: 'Todos'
+        },
+        {
+          path: 'categories',
+          title: 'Categorias'
+        }
+      ]
     },
     {
       path: 'expenditures',
-      showName: 'gastos'
+      title: 'gastos'
     },
     {
       path: 'budget',
-      showName: 'presupuesto'
+      title: 'presupuesto'
+    },
+    {
+      path: 'calendar',
+      title: 'Calendario'
     }
   ]
-  const drawer = (
+
+  const Item = ({ title, path, children }) => {
+    const [isOpen, setOpen] = useState<boolean>(false)
+
+    const toggleAccordion = useCallback(() => {
+      setOpen(!isOpen)
+    }, [isOpen])
+
+    if (!children || !children.length) {
+      return (
+        <Link to={path} className='w-full'>
+          <ListItemText
+            primary={title ?? path}
+            className='capitalize'
+          ></ListItemText>
+        </Link>
+      )
+    }
+
+    return (
+      <Accordion className='w-full'>
+        <Accordion.Title active={isOpen} index={0} onClick={toggleAccordion}>
+          {title}
+        </Accordion.Title>
+        <Accordion.Content active={isOpen}>
+          {children.map((child) => (
+            <Link to={`${path}/${child.path}`} className='w-full'>
+              <ListItemText
+                primary={child.title ?? child.path}
+                className='capitalize'
+              ></ListItemText>
+            </Link>
+          ))}
+        </Accordion.Content>
+      </Accordion>
+    )
+  }
+
+  const drawer = routeItems.map((routeItem, index) => {
+    const { path, title, children } = routeItem
+    return (
+      <ListItem>
+        <ListItemButton>
+          <Item title={title} path={path} children={children} />
+        </ListItemButton>
+      </ListItem>
+    )
+  })
+
+  const d = (
     <div>
       <List>
         {routeItems.map((routeItem, index) => {
-          const { path, showName } = routeItem
+          const { path, title, children } = routeItem
           return (
             <Link to={path} key={index}>
               <ListItem disablePadding>
@@ -42,7 +106,7 @@ function ResponsiveDrawer (props) {
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
-                  <ListItemText primary={showName ?? path} className='capitalize' />
+                  <Item title={title} path={path} children={children} />
                 </ListItemButton>
               </ListItem>
             </Link>
@@ -63,11 +127,14 @@ function ResponsiveDrawer (props) {
           variant='permanent'
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: drawerWidth
+            }
           }}
           open
         >
-          {drawer}
+          <List>{drawer}</List>
         </Drawer>
       </Box>
     </Box>

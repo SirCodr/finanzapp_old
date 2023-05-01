@@ -14,5 +14,8 @@ export const incomesReducers = {
   },
   removeIncomeById: (state: Incomes, action: PayloadAction<number>) => {
     state.data = state.data.filter(income => income.id !== action.payload)
+  },
+  setNextResultsAvailable: (state: Incomes, action: PayloadAction<boolean>) => {
+    state.nextResultsAvailable = action.payload
   }
 }
