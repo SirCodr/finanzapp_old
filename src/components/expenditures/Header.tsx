@@ -17,7 +17,7 @@ const ExpendituresHeader = () => {
             <span>Filtros</span>
           </Button>
           <Button>Comparar con presupuesto</Button>
-          <Button primary onClick={() => { navigate('../create') }}>Agregar gasto</Button>
+          <Button primary onClick={() => { navigate('./create') }}>Agregar gasto</Button>
         </section>
       </div>
     </div>

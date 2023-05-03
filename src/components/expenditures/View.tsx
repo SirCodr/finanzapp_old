@@ -1,19 +1,32 @@
 import { AgGridReact } from 'ag-grid-react'
-import useIncomeView from '@src/hooks/useIncome'
-import { Button, Loader, Pagination } from 'semantic-ui-react'
 import InfinityScrollButton from '@src/glbComponents/InfinityScrollButton'
+import useExpenditure from '@src/hooks/useExpenditure'
+import { handleRequestError } from '@src/services/utils'
+import { Loader } from 'semantic-ui-react'
 
 const View = () => {
-  // if (!data.length && isLoading) return <Loader active content='Cargando...' />
+  const {
+    expenditures,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    columnDefs
+  } = useExpenditure()
+
+  if (!expenditures && isLoading) return <Loader active content='Cargando...' />
+
+  if (isError) {
+    handleRequestError(isError, 'No se pudo obtener los ingresos')
+  }
 
   return (
     <div className='ag-theme-alpine w-full h-full'>
-      <AgGridReact columnDefs={[]} rowData={[]} />
+      <AgGridReact columnDefs={columnDefs} rowData={expenditures} />
       <InfinityScrollButton
-        nextResultsAvailable={false}
-        nextPage={15}
-        isLoading={false}
-        onClick={()=>{}}
+        nextResultsAvailable={hasNextPage}
+        isLoading={expenditures && isLoading}
+        onClick={fetchNextPage}
       />
     </div>
   )

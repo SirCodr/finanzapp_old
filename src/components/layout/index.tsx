@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
-import ToggleSideBar from './ToggleSideBar'
 import SideBar from './SideBar'
+import Header from './Header'
 
 const Layout = () => {
   return (
@@ -9,10 +9,7 @@ const Layout = () => {
         <SideBar />
       </aside>
       <section className='grid grid-rows-[auto_1fr]'>
-        <header className='flex'>
-          <ToggleSideBar />
-          Header
-        </header>
+        <Header />
         <main className='px-4 py-5'>
           <Outlet />
         </main>

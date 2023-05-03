@@ -68,6 +68,35 @@ export interface Database {
           id?: number
         }
       }
+      gastos: {
+        Row: {
+          categoria_id: number
+          created_at: string | null
+          descripcion: string | null
+          fecha: string
+          id: number
+          metodo_pago_id: number
+          valor: number
+        }
+        Insert: {
+          categoria_id: number
+          created_at?: string | null
+          descripcion?: string | null
+          fecha: string
+          id?: number
+          metodo_pago_id: number
+          valor: number
+        }
+        Update: {
+          categoria_id?: number
+          created_at?: string | null
+          descripcion?: string | null
+          fecha?: string
+          id?: number
+          metodo_pago_id?: number
+          valor?: number
+        }
+      }
       ingresos: {
         Row: {
           categoria_id: number

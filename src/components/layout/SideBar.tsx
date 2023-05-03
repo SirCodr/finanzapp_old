@@ -70,8 +70,8 @@ function ResponsiveDrawer(props) {
           {title}
         </Accordion.Title>
         <Accordion.Content active={isOpen}>
-          {children.map((child) => (
-            <Link to={`${path}/${child.path}`} className='w-full'>
+          {children.map((child, index) => (
+            <Link to={`${path}/${child.path}`} className='w-full' key={index}>
               <ListItemText
                 primary={child.title ?? child.path}
                 className='capitalize'
@@ -86,7 +86,7 @@ function ResponsiveDrawer(props) {
   const drawer = routeItems.map((routeItem, index) => {
     const { path, title, children } = routeItem
     return (
-      <ListItem>
+      <ListItem key={index}>
         <ListItemButton>
           <Item title={title} path={path} children={children} />
         </ListItemButton>

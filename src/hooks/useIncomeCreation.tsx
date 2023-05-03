@@ -2,11 +2,10 @@ import supabase from '@src/supabase'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import { IncomeCategoryType, IncomeType, PaymentMethodType } from '@src/types/collections'
-import { getAllPaymentMethods } from '@src/services/paymentMethos'
-import { useAppDispatch } from './useApp'
+import { getAllPaymentMethods } from '@src/services/paymentMethods'
 import { handleRequestError } from '@src/services/utils'
 import { getAllIncomeCategories } from '@src/services/incomeCategories'
-import { IncomesWithForeigns } from '@src/types/collections'
+import { getFormData, handleFormBadFilled, isFormWellFilled } from '@src/utils'
 
 type dropDownType = {
   key: number,
@@ -17,34 +16,22 @@ type dropDownType = {
 const useIncomeCreation = () => {
   const [paymentMethods, setPaymentMehtods] = useState<dropDownType[]>([])
   const [incomeCategories, setIncomeCategories] = useState<dropDownType[]>([])
-  const [formData, setFormData] = useState<IncomeType | object>({})
   const formRef = useRef<HTMLFormElement>()
-  const dispatch = useAppDispatch()
 
   const handleAddIncome = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
 
-    if(!isFormWellFilled()) {
+    if(!isFormWellFilled(formRef.current)) {
       return handleFormBadFilled()
     }
 
-    const currentFormData = getFormData()
+    const currentFormData = getFormData(formRef.current)
     formRef?.current?.reset()
     const { error } = await supabase.from('ingresos').insert([currentFormData])
 
     if (!error) {
       toast.success('Ingreso creado con éxito')
     }    
-  }
-
-  const getFormData = () : IncomesWithForeigns => {
-    const entries = Object.fromEntries(new FormData(formRef.current))
-    return { ...entries, id: 0 }
-  }
-
-  const setInputValueByName = (name: string, value: string) => {
-    const input = document.querySelector(`input[name=${name}]`) as HTMLInputElement
-    input.value = value
   }
 
   const fetchAndSetPaymentMethods = async () => {
@@ -97,17 +84,6 @@ const useIncomeCreation = () => {
     }
   }
 
-  const isFormWellFilled = () : boolean => {
-    const requiredInputsForm = formRef.current?.querySelectorAll('input[required]') as NodeListOf<HTMLInputElement>
-    const isSomeRequiredInputEmpty = Array.from(requiredInputsForm).some(requiredInput => requiredInput.value.trim() === '') as boolean
-
-    return !isSomeRequiredInputEmpty
-  }
-
-  const handleFormBadFilled = () => {
-    toast.error('Llene todos los campos obliagtorios')
-  }
-
   useEffect(() => {
     (async () => {
       await fetchAndSetPaymentMethods()
@@ -116,7 +92,7 @@ const useIncomeCreation = () => {
   }, [])
 
   return (
-    { paymentMethods, incomeCategories, handleAddIncome, setInputValueByName, isFormWellFilled, formRef }
+    { paymentMethods, incomeCategories, handleAddIncome, isFormWellFilled, formRef }
   )
 }
 export default useIncomeCreation

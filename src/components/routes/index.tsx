@@ -9,11 +9,21 @@ import PageNotFound from '@src/pages/PageNotFound'
 import IncomesCreationPage from '@src/pages/incomes/create'
 import Calendar from '../Calendar'
 import Expenditures from '../expenditures'
+import ExpendituresCreation from '../expenditures/create'
+import Login from '../login'
+import ProtectedRoute from './ProtectedRoute'
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route
+        path='/'
+        element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<Dashboard />} />
         <Route path='dashboard' element={<Dashboard />} />
         <Route path='incomes'>
@@ -23,7 +33,7 @@ const AppRoutes = () => {
         </Route>
         <Route path='expenditures'>
           <Route index element={<Expenditures />} />
-          <Route path='create' element={<h1>create expenditures</h1>} />
+          <Route path='create' element={<ExpendituresCreation />} />
         </Route>
         <Route path='budget'>
           <Route index element={<>view budget</>} />
@@ -32,6 +42,7 @@ const AppRoutes = () => {
         <Route path='calendar' element={<Calendar />} />
         <Route path='*' element={<PageNotFound />} />
       </Route>
+      <Route path='/login' element={<Login />} />
     </Routes>
   )
 }

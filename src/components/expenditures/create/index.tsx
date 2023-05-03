@@ -2,19 +2,19 @@ import { Card, Dropdown, Input } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 
 import 'react-datepicker/dist/react-datepicker.css'
-import useIncomeCreation from '@src/hooks/useIncomeCreation'
 import { useMemo, useState } from 'react'
 import { DateTime } from 'luxon'
-import { setInputValueByName } from '@src/utils'
+import useExpenditureCreation from '@src/hooks/useExpenditureCreation'
 
-const IncomesCreate = () => {
+const ExpendituresCreation = () => {
   const {
     paymentMethods,
-    incomeCategories,
-    handleAddIncome,
+    expenditureCategories,
+    handleAddExpenditure,
+    setInputValueByName,
     formRef,
-  } = useIncomeCreation()
-
+  } = useExpenditureCreation()
+  
   const [startDate, setStartDate] = useState(new Date())
   const dateFormatted = useMemo(() => {
     if(!startDate) return ''
@@ -30,10 +30,10 @@ const IncomesCreate = () => {
             className='w-full items-center'
             style={{ display: 'flex' }}
           >
-            <span>Agregar Ingreso</span>
+            <span>Agregar Gasto</span>
             <button
               className='ml-auto bg-blue-600 px-4 py-2 rounded text-white'
-              onClick={handleAddIncome}
+              onClick={handleAddExpenditure}
             >
               Agregar
             </button>
@@ -42,9 +42,9 @@ const IncomesCreate = () => {
         <Card.Content extra className='w-full flex flex-col gap-y-6'>
           <section className='flex gap-x-4'>
             <div className='flex flex-col'>
-              <label htmlFor='methods_select'>Métodos (*)</label>
+              <label htmlFor='methods_select'>Método (*)</label>
               <Dropdown
-                placeholder='Metodos'
+                placeholder='Metodo'
                 search
                 selection
                 options={paymentMethods}
@@ -61,12 +61,12 @@ const IncomesCreate = () => {
               />
             </div>
             <div className='flex flex-col'>
-              <label htmlFor='categories_select'>Categorias (*)</label>
+              <label htmlFor='categories_select'>Categoria (*)</label>
               <Dropdown
-                placeholder='Categorias'
+                placeholder='Categoria'
                 search
                 selection
-                options={incomeCategories}
+                options={expenditureCategories}
                 onChange={(e, { value }) => {
                   setInputValueByName('categoria_id', value)
                 }}
@@ -136,4 +136,4 @@ const IncomesCreate = () => {
     </form>
   )
 }
-export default IncomesCreate
+export default ExpendituresCreation
